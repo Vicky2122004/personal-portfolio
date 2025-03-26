@@ -1,0 +1,29 @@
+import { NavData } from "@/Constants/Constants";
+import React from "react";
+
+export const FloatingMenu: React.FC = () => {
+  return (
+    <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 w-[90%] lg:hidden z-50">
+      <div className="p-4 bg-white shadow-lg rounded-xl backdrop-blur-lg border border-gray-200">
+        <nav>
+          <ul className="flex justify-between items-center">
+            {NavData.map((nav, i: number) => (
+              <li key={i} className="relative">
+                <a
+                  href={nav.path}
+                  className="flex flex-col items-center gap-1 text-gray-600 hover:text-blue-600 transition-all duration-300"
+                >
+                  {nav.icon}
+                  {/* <span className="text-xs">{nav.label}</span> */}
+                </a>
+                {/* {nav.active && (
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+            )} */}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+};
