@@ -1,17 +1,37 @@
 import { NavData } from "@/Constants/Constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 
 export const Header: React.FC = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleOpenMenu = () => {
     setOpenMenu(!openMenu);
   };
 
   return (
-    <>
+    <section
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center justify-between px-6 pt-3 lg:px-10 lg:pt-2">
         <div>
           <a href="/">
@@ -24,7 +44,8 @@ export const Header: React.FC = () => {
               return (
                 <li
                   key={i}
-                  className="font-medium text-md hover:text-emerald-400 transition"
+                  className="text-md hover:text-[hsl(var(--primary))] text-sm font-medium transition-colors duration-200 highlight-text animate-fade-in"
+                  style={{ animationDelay: `${i * 100}ms` }}
                 >
                   <a href={nav.path}>{nav.label}</a>
                 </li>
@@ -58,6 +79,6 @@ export const Header: React.FC = () => {
           </nav>
         </div>
       )}
-    </>
+    </section>
   );
 };
