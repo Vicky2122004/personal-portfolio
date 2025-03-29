@@ -26,16 +26,16 @@ export const Header: React.FC = () => {
 
   return (
     <section
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed h-14 top-0 left-0 right-0 z-50 transition-all duration-300 py-2 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md shadow-sm"
+          ? "bg-transparent backdrop-blur-md shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="flex items-center justify-between px-6 pt-3 lg:px-10 lg:pt-2">
         <div>
           <a href="/">
-            <h1 className="text-2xl font-bold">Portfolio.</h1>
+            <h1 className="text-3xl font-bold text-gray-100">Portfolio.</h1>
           </a>
         </div>
         <nav>
@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
               return (
                 <li
                   key={i}
-                  className="text-md hover:text-[hsl(var(--primary))] text-sm font-medium transition-colors duration-200 highlight-text animate-fade-in"
+                  className="text-lg font-medium transition-colors duration-200 highlight-text animate-fade-in text-gray-100"
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
                   <a href={nav.path}>{nav.label}</a>
@@ -55,21 +55,29 @@ export const Header: React.FC = () => {
         </nav>
         <div className="block lg:hidden">
           {openMenu ? (
-            <IoMdClose size={25} onClick={handleOpenMenu} />
+            <IoMdClose
+              size={25}
+              onClick={handleOpenMenu}
+              className="text-gray-100"
+            />
           ) : (
-            <GiHamburgerMenu size={25} onClick={handleOpenMenu} />
+            <GiHamburgerMenu
+              size={25}
+              onClick={handleOpenMenu}
+              className="text-gray-100"
+            />
           )}
         </div>
       </div>
       {openMenu && (
         <div>
           <nav className="px-7 grid place-items-end lg:hidden">
-            <ul className="bg-gray-300 rounded-lg p-6 space-y-4 w-40 text-center">
+            <ul className="bg-transparent rounded-lg p-6 space-y-4 w-40 text-center">
               {NavData.map((nav, i: number) => {
                 return (
                   <li
                     key={i}
-                    className="font-medium text-md hover:text-emerald-400 transition"
+                    className="font-medium text-lg hover:text-emerald-400 transition text-gray-100"
                   >
                     <a href={nav.path}>{nav.label}</a>
                   </li>
