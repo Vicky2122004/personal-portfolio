@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { HeaderPage } from "./pages/HeaderPage";
 import { HeroPage } from "./pages/HeroPage";
 import { gsap } from "gsap";
-
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+// import "primeicons/primeicons.css";
+// import "primeflex/primeflex.css";
 export const App: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorFollowerRef = useRef<HTMLDivElement>(null);
-  const [cursorColor, setCursorColor] = useState("white");
+  const [cursorColor, setCursorColor] = useState("#fff");
 
   useEffect(() => {
     if (cursorRef.current && cursorFollowerRef.current) {
