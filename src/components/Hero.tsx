@@ -56,10 +56,13 @@ export const Hero: React.FC = () => {
             variants={itemVariants}
           >
             <motion.h1
-              className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 py-3"
+              className="text-4xl md:text-5xl font-bold text-white py-3"
               variants={itemVariants}
             >
-              Hi, I'm Vignesh
+              Hi, I'm{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                Vignesh
+              </span>
             </motion.h1>
 
             <motion.p
@@ -107,7 +110,7 @@ export const Hero: React.FC = () => {
             variants={imageVariants}
             whileHover="hover"
           >
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 blur-xl opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 blur-xl opacity-20"></div>
             <div className="relative rounded-full p-1 bg-gradient-to-r from-cyan-500 to-blue-600">
               <img
                 src="/assets/vignesh.jpg"
