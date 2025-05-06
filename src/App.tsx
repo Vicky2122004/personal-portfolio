@@ -149,7 +149,7 @@ export const App: React.FC = () => {
 
   return (
     <>
-      <div
+      {/* <div
         ref={cursorRef}
         className="fixed w-4 h-4 rounded-full pointer-events-none z-[1000] opacity-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference shadow-[0_0_8px_#00ffff]"
         style={{ backgroundColor: cursorColor }}
@@ -158,7 +158,7 @@ export const App: React.FC = () => {
         ref={cursorFollowerRef}
         className="fixed w-8 h-8 rounded-full border-2 pointer-events-none z-[1000] opacity-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference shadow-[0_0_20px_#00ffff]"
         style={{ borderColor: cursorColor }}
-      ></div>
+      ></div> */}
       <HeaderPage />
       <HeroPage />
     </>
