@@ -8,7 +8,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 export const Education: React.FC = () => {
   return (
-    <div className="h-screen bg-gray-950" id="academics">
+    <div className="h-[102vh] bg-gray-950" id="academics">
       <div className="font-bold text-2xl pt-22">
         <h1 className="text-white text-center">
           Academics <span className="text-pink-500">.</span>

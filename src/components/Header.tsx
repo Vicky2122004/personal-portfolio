@@ -47,6 +47,17 @@ export const Header: React.FC = () => {
     setOpenMenu(!openMenu);
   };
 
+  const calculateBorderWidth = (label: string) => {
+    const navItem = NavData.find((nav: any) => nav.label === label);
+    if (!navItem) return "0px";
+
+    const textLength = navItem.label.length;
+    const adjustedLength = Math.max(textLength - 2, 0);
+
+    const pxWidth = adjustedLength * 7;
+    return `${pxWidth}px`;
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="mx-4 my-4 lg:mx-8 lg:my-5">
@@ -73,7 +84,7 @@ export const Header: React.FC = () => {
                 </a>
                 <div
                   className={`
-                      border-b-2 w-6 mx-auto transition-all duration-300
+                      border-b-2 mx-auto transition-all duration-300
 
                       ${
                         activeId === nav.id
@@ -81,6 +92,9 @@ export const Header: React.FC = () => {
                           : "border-transparent opacity-0"
                       }
                     `}
+                  style={{
+                    width: `${calculateBorderWidth(nav.label)}`,
+                  }}
                 ></div>
               </li>
             ))}

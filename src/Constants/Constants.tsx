@@ -158,3 +158,5 @@ export const AcademicDetails = [
     place: "Andipatti",
   },
 ];
+
+export const ProjectSections = ["All", "React", "Remotion"];
