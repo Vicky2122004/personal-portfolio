@@ -59,13 +59,15 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <header className="fixed w-full  z-50 transition-all duration-300">
       <div className="mx-4 my-4 lg:mx-8 lg:my-5">
-        <div className="flex items-center justify-between px-6 py-2 lg:px-12 bg-gray-900 rounded-md border border-gray-700 shadow-md">
-          <a className="text-2xl font-bold text-white tracking-wide">
-            Portfolio<span className="text-pink-500">.</span>
+        <div className="flex items-center justify-between px-6 py-2 lg:px-12 bg-gray-900 rounded-sm border border-gray-700 shadow-md">
+          {/* Logo */}
+          <a className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 font-bold text-2xl">
+            Vignesh T
           </a>
 
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex gap-8">
             {NavData.map((nav, i) => (
               <li
@@ -84,14 +86,13 @@ export const Header: React.FC = () => {
                 </a>
                 <div
                   className={`
-                      border-b-2 mx-auto transition-all duration-300
-
-                      ${
-                        activeId === nav.id
-                          ? "border-pink-500 opacity-100"
-                          : "border-transparent opacity-0"
-                      }
-                    `}
+                border-b-2 mx-auto transition-all duration-300
+                ${
+                  activeId === nav.id
+                    ? "border-pink-500 opacity-100"
+                    : "border-transparent opacity-0"
+                }
+              `}
                   style={{
                     width: `${calculateBorderWidth(nav.label)}`,
                   }}
@@ -100,6 +101,7 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
+          {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             {openMenu ? (
               <IoMdClose
@@ -117,8 +119,9 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
+        {/* Mobile Menu Dropdown */}
         {openMenu && (
-          <div className="absolute top-full right-4 w-52 bg-gray-900/90 backdrop-blur-md rounded-md border border-gray-700 shadow-lg">
+          <div className="absolute top-full right-4 w-52 bg-gray-900/90 backdrop-blur-md rounded-md border border-gray-700 shadow-lg lg:hidden">
             <nav className="py-2 px-8">
               <ul className="space-y-4 text-center">
                 {NavData.map((nav, i) => (
@@ -131,24 +134,24 @@ export const Header: React.FC = () => {
                       href={`#${nav.id}`}
                       onClick={(e) => handleNavClick(nav.id, e)}
                       className={`
-            block text-lg font-medium 
-            transition hover:text-pink-600 
-            relative pb-1
-            ${activeId === nav.id ? "text-pink-500" : "text-gray-100"}
-          `}
+                    block text-lg font-medium 
+                    transition hover:text-pink-600 
+                    relative pb-1
+                    ${activeId === nav.id ? "text-pink-500" : "text-gray-100"}
+                  `}
                     >
                       {nav.label}
                       <div
                         className={`
-              absolute bottom-0 left-1/2 transform -translate-x-1/2
-              border-b-2 w-6 transition-all duration-300
-              ${
-                activeId === nav.id
-                  ? "border-pink-500 opacity-100"
-                  : "border-transparent opacity-0"
-              }
-              group-hover:border-pink-500 group-hover:opacity-100
-            `}
+                      absolute bottom-0 left-1/2 transform -translate-x-1/2
+                      border-b-2 w-6 transition-all duration-300
+                      ${
+                        activeId === nav.id
+                          ? "border-pink-500 opacity-100"
+                          : "border-transparent opacity-0"
+                      }
+                      group-hover:border-pink-500 group-hover:opacity-100
+                    `}
                       ></div>
                     </a>
                   </li>

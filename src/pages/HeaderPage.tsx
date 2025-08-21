@@ -6,7 +6,6 @@ export const HeaderPage: React.FC = () => {
   return (
     <>
       <Header />
-      {/* <FloatingMenu /> */}
     </>
   );
 };

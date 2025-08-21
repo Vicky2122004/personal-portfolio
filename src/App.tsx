@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { HeaderPage } from "./pages/HeaderPage";
 import { HeroPage } from "./pages/HeroPage";
 import { gsap } from "gsap";
 import "primereact/resources/themes/lara-light-blue/theme.css";
@@ -159,7 +158,6 @@ export const App: React.FC = () => {
         className="fixed w-8 h-8 rounded-full border-2 pointer-events-none z-[1000] opacity-0 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference shadow-[0_0_20px_#00ffff]"
         style={{ borderColor: cursorColor }}
       ></div> */}
-      <HeaderPage />
       <HeroPage />
     </>
   );
