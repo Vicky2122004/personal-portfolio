@@ -190,7 +190,7 @@ export const Hero: React.FC = () => {
             >
               {/* Profile image */}
               <motion.img
-                src="/assets/vignesh.png"
+                src="/assets/vignesh.jpeg"
                 alt="Vignesh"
                 className="w-full h-full object-cover"
                 whileHover={{ scale: 1.05 }}
