@@ -63,8 +63,19 @@ export const Header: React.FC = () => {
       <div className="mx-4 my-4 lg:mx-8 lg:my-5">
         <div className="flex items-center justify-between px-6 py-2 lg:px-12 bg-gray-900 rounded-sm border border-gray-700 shadow-md">
           {/* Logo */}
-          <a className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 font-bold text-2xl">
-            Vignesh T
+          <a href="/" className="flex items-center group relative">
+            {/* Logo */}
+            <img src="/assets/logo.png" alt="Logo" className="w-10 h-10" />
+
+            {/* Name - hidden on mobile */}
+            <span
+              className="ml-2 text-xl font-semibold bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 
+             bg-clip-text text-transparent whitespace-nowrap
+             opacity-0 translate-x-[-10px] transition-all duration-300
+             group-hover:opacity-100 group-hover:translate-x-0 hidden sm:inline-block"
+            >
+              Vignesh
+            </span>
           </a>
 
           {/* Desktop Navigation */}

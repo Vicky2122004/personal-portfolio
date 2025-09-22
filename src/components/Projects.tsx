@@ -1,53 +1,36 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { ProjectDetailsData } from "@/Constants/Constants";
-
-const groupProjectsById = () => {
-  const groups: Record<string, typeof ProjectDetailsData> = {};
-  ProjectDetailsData.forEach((project) => {
-    const id = project.id.toLowerCase();
-    if (!groups[id]) {
-      groups[id] = [];
-    }
-    groups[id].push(project);
-  });
-  return groups;
-};
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
-// const scaleUp = {
-//   hidden: { opacity: 0, scale: 0.95 },
-//   visible: { opacity: 1, scale: 1 },
-// };
-
 export const Projects: React.FC = () => {
-  const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState<string>("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const groupedProjects = groupProjectsById();
-  // const categories = ["all", ...Object.keys(groupedProjects)];
-  const filteredProjects =
-    activeCategory === "all"
-      ? ProjectDetailsData
-      : groupedProjects[activeCategory] || [];
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleProjectClick = (projectId: string) => {
-    navigate(`/projects/${projectId}`);
+  const nextImage = () => {
+    setCurrentImageIndex((prev) =>
+      prev === selectedProject.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? selectedProject.images.length - 1 : prev - 1
+    );
+  };
+
+  const handleProjectClick = (project: any) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
   };
 
   return (
     <div className="bg-gray-950 pt-24 px-5 pb-28 relative" id="projects">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-900/20 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-pink-900/20 blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/3 w-96 h-96 rounded-full bg-blue-900/10 blur-3xl"></div>
-      </div>
-
       {/* Section Header */}
       <div className="text-center mb-16 max-w-4xl mx-auto">
         <motion.h1
@@ -55,19 +38,16 @@ export const Projects: React.FC = () => {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-white text-5xl md:text-6xl font-bold mb-4"
+          className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient bg-200% text-5xl md:text-6xl font-bold mb-4"
         >
-          My{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-            Projects
-          </span>
+          My Projects
         </motion.h1>
         <motion.p
           variants={fadeInUp}
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-gray-500 text-lg mb-6"
+          className="text-xl text-gray-300 max-w-3xl mx-auto mt-8 mb-6"
         >
           Explore my portfolio of work across different domains and technologies
         </motion.p>
@@ -79,46 +59,9 @@ export const Projects: React.FC = () => {
         />
       </div>
 
-      {/* Category Buttons */}
-      {/* {categories.length > 1 && (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.05,
-              },
-            },
-          }}
-          className="flex flex-wrap justify-center gap-3 mb-16 px-4"
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              variants={scaleUp}
-              onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg shadow-pink-500/20"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category === "all"
-                ? "All"
-                : `${category.charAt(0).toUpperCase() + category.slice(1)}`}
-            </motion.button>
-          ))}
-        </motion.div>
-      )} */}
-
       {/* Project Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {filteredProjects.map((project, i) => (
+        {ProjectDetailsData.map((project, i) => (
           <motion.div
             key={`${project.id}-${i}`}
             variants={fadeInUp}
@@ -129,7 +72,7 @@ export const Projects: React.FC = () => {
             className="relative group"
             onMouseEnter={() => setHoveredProject(project.id)}
             onMouseLeave={() => setHoveredProject(null)}
-            onClick={() => handleProjectClick(project.id)}
+            onClick={() => handleProjectClick(project)}
           >
             <div className="h-full flex flex-col rounded-2xl bg-gradient-to-b from-gray-900 to-gray-900/80 border border-gray-800 hover:border-transparent transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-pink-500/10 overflow-hidden cursor-pointer">
               {/* Image */}
@@ -140,7 +83,6 @@ export const Projects: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
 
                 {/* Tech Stack Badges */}
                 {project.techStack && (
@@ -182,10 +124,12 @@ export const Projects: React.FC = () => {
                       x: hoveredProject === project.id ? 5 : 0,
                     }}
                     transition={{ type: "spring", stiffness: 500 }}
+                    className="flex items-center gap-1"
                   >
+                    <span className="text-xs text-pink-500">View details</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-pink-500"
+                      className="h-4 w-4 text-pink-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -205,44 +149,243 @@ export const Projects: React.FC = () => {
         ))}
       </div>
 
-      {/* Empty State */}
-      {filteredProjects.length === 0 && (
-        <motion.div
-          className="text-center py-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="max-w-md mx-auto">
-            <svg
-              className="w-20 h-20 mx-auto text-gray-600 mb-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+      {/* Modern Popup Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className="bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-gray-800"
+              onClick={(e) => e.stopPropagation()}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <h3 className="text-2xl font-medium text-gray-300 mb-2">
-              No projects found
-            </h3>
-            <p className="text-gray-500 mb-6">
-              We couldn't find any projects in this category.
-            </p>
-            <button
-              onClick={() => setActiveCategory("all")}
-              className="px-6 py-2.5 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white rounded-full font-medium transition-all duration-300 shadow-md"
-            >
-              View All Projects
-            </button>
-          </div>
-        </motion.div>
-      )}
+              {/* Content */}
+              <div className="overflow-y-auto max-h-[90vh]">
+                {/* Image Banner with Carousel and Header Overlay */}
+                <div className="relative h-[26rem] bg-gray-800 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={selectedProject.images[currentImageIndex]}
+                      alt={`${selectedProject.title}-${currentImageIndex}`}
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </AnimatePresence>
+
+                  {/* Header Overlay */}
+                  <div className="absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/70 to-transparent z-10">
+                    <div className="flex justify-between items-center">
+                      <h2 className="text-2xl font-bold text-white">
+                        {selectedProject.title}
+                      </h2>
+                      <button
+                        onClick={() => setSelectedProject(null)}
+                        className="text-gray-200 hover:text-white transition p-1 rounded-full hover:bg-black/30 backdrop-blur-sm"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  {selectedProject.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-all z-10"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-all z-10"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                    </>
+                  )}
+
+                  {/* Image Indicators */}
+                  {selectedProject.images.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                      {selectedProject.images.map((_: any, idx: number) => (
+                        <button
+                          key={idx}
+                          onClick={() => setCurrentImageIndex(idx)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            idx === currentImageIndex
+                              ? "bg-pink-500 scale-125"
+                              : "bg-white/50 hover:bg-white/80"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-6 space-y-6">
+                  {/* Description */}
+                  <p className="text-gray-300 text-base leading-relaxed">
+                    {selectedProject.long_desc}
+                  </p>
+
+                  {/* Features */}
+                  {selectedProject.features && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-pink-400 mb-3">
+                        Key Features
+                      </h3>
+                      <ul className="space-y-2 text-gray-300">
+                        {selectedProject.features.map(
+                          (feature: string, idx: number) => (
+                            <li key={idx} className="flex items-start">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              <span>{feature}</span>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Tech Stack */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-pink-400 mb-3">
+                      Tech Stack
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.techStack.map(
+                        (tech: string, idx: number) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 text-sm border border-gray-700 hover:bg-gray-750 transition-colors"
+                          >
+                            {tech}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex gap-4 pt-2">
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg text-white font-medium shadow hover:shadow-lg hover:shadow-pink-500/30 transition flex items-center gap-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        Live Demo
+                      </a>
+                    )}
+                    {selectedProject.playStoreUrl && (
+                      <a
+                        href={selectedProject.playStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg text-white font-medium shadow hover:shadow-lg hover:shadow-green-500/30 transition flex items-center gap-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                          />
+                        </svg>
+                        Play Store
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

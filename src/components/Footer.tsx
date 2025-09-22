@@ -64,17 +64,10 @@ export const Footer: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
-            className="space-y-6"
+            className="space-y-3"
           >
             <motion.div variants={itemVariants}>
-              <h2 className="text-2xl font-bold text-white">
-                <span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500
-              to-purple-600"
-                >
-                  Vignesh T
-                </span>
-              </h2>
+              <img src="/assets/logo.png" className="w-12 h-12" />
             </motion.div>
 
             <motion.p
