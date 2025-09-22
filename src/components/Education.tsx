@@ -49,10 +49,10 @@ export const Education: React.FC = () => {
 
           {/* Separator */}
           <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent my-6"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="w-24 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 mx-auto mt-6 rounded-full"
           />
         </motion.div>
       </div>

@@ -121,16 +121,16 @@ export const Skills: React.FC = () => {
       id="skills"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-16 md:mb-20"
-        >
-          <div className="relative inline-block">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-12"
+          >
+            {/* Title */}
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight relative z-10"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -140,25 +140,27 @@ export const Skills: React.FC = () => {
                 Skills & Technologies
               </span>
             </motion.h1>
-          </div>
 
-          <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto mt-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Technologies I've mastered through projects and experience
-          </motion.p>
+            {/* Subtitle */}
+            <motion.p
+              className="text-xl text-gray-300 max-w-3xl mx-auto mt-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Technologies I've mastered through projects and experience.
+            </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: "100%" }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent my-6"
-          />
-        </motion.div>
+            {/* Separator */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="w-24 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 mx-auto mt-6 rounded-full"
+            />
+          </motion.div>
+        </div>
 
         <motion.div
           variants={containerVariants}
