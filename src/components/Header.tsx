@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
 
             {/* Name - hidden on mobile */}
             <span
-              className="ml-2 text-xl font-semibold bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 
+              className="ml-2 text-xl font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
              bg-clip-text text-transparent whitespace-nowrap
              opacity-0 translate-x-[-10px] transition-all duration-300
              group-hover:opacity-100 group-hover:translate-x-0 hidden sm:inline-block"
