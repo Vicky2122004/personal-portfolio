@@ -193,7 +193,8 @@ export const Footer: React.FC = () => {
           transition={{ delay: 0.5 }}
           className="mt-8 text-center text-gray-600 text-sm flex justify-center items-center"
         >
-          Made with <FaHeart className="text-pink-500 mx-1" /> in India
+          Made with <FaHeart className="text-pink-500 mx-1 animate-pulse" /> in
+          India
         </motion.div>
       </div>
     </footer>

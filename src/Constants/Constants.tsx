@@ -117,7 +117,7 @@ export const ContactInfo = [
     type: "location",
     icon: <FaMapMarkerAlt className="text-blue-400 text-xl" />,
     title: "Location",
-    value: "13-4-17, North Street, Andipatti, Theni",
+    value: "13-4-17, North Street, Andipatti, Theni, Tamil Nadu",
     color: "from-blue-500/20 to-cyan-600/20",
     borderColor: "border-blue-500/20",
     action: null,
