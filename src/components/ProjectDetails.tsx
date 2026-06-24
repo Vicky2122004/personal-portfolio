@@ -13,7 +13,7 @@ export const ProjectDetails: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) =>
-        prev === project.images.length - 1 ? 0 : prev + 1
+        prev === project.images.length - 1 ? 0 : prev + 1,
       );
     }, 5000);
 
@@ -177,7 +177,7 @@ export const ProjectDetails: React.FC = () => {
               <div className="space-y-4">
                 <motion.a
                   whileHover={{ scale: 1.02 }}
-                  href={project.githubUrl}
+                  // href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all"
