@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-gray-950  flex items-center justify-center px-6 relative overflow-hidden"
+      className="min-h-screen bg-gray-950 flex items-center justify-center px-6 pt-28 pb-12 md:pt-36 lg:py-0 relative overflow-hidden"
       id="home"
     >
       {/* Floating shapes */}
@@ -163,7 +163,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative w-[320px] h-[320px] md:w-[380px] md:h-[380px]"
+            className="relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px]"
           >
             {/* Outer glow ring */}
             <motion.div
