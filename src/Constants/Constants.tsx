@@ -383,4 +383,57 @@ export const ProjectDetailsData = [
     playStoreUrl: null,
     year: 2025,
   },
+  {
+    id: "6",
+    title: "Yaash Mart",
+    short_desc:
+      "Full-featured eCommerce platform for groceries, fashion, and daily essentials with secure online ordering and delivery management.",
+    long_desc:
+      "Yaash Mart is a comprehensive eCommerce platform that enables customers to browse, purchase, and receive products from multiple categories including groceries, fashion items, household essentials, and lifestyle products. The platform provides a seamless shopping experience through web and mobile applications, featuring secure payment integration, real-time order management, location-based delivery services, inventory management, and customer-friendly product discovery. The system includes a powerful admin dashboard for managing products, orders, users, promotions, and delivery operations, ensuring smooth business operations and an enhanced customer experience.",
+
+    images: [
+      "/assets/projectImages/yaashMart/home.png",
+      "/assets/projectImages/yaashMart/productDetails.png",
+      "/assets/projectImages/yaashMart/cart.png",
+      "/assets/projectImages/yaashMart/profile.png",
+      "/assets/projectImages/yaashMart/orders.png",
+      "/assets/projectImages/yaashMart/wishlist.png",
+    ],
+
+    category: "E-Commerce",
+
+    techStack: [
+      "React",
+      "Redux Toolkit",
+      "TailwindCSS",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Knex.js",
+      "Firebase",
+      "Razorpay",
+      "Shadcn/UI",
+    ],
+
+    features: [
+      "Browse products across multiple categories including groceries, fashion, and household essentials",
+      "Advanced product search and category-based filtering",
+      "Shopping cart and wishlist management",
+      "Secure online payments with multiple payment options",
+      "Location-based delivery and address management",
+      "Real-time order tracking and order history",
+      "User authentication and profile management",
+      "Admin dashboard for product, inventory, and order management",
+      "Discounts, offers, and promotional campaign support",
+      "Responsive web and mobile-friendly shopping experience",
+    ],
+
+    githubUrl: null,
+
+    liveUrl: "https://mart.yaash.co.in",
+
+    playStoreUrl: null,
+
+    year: 2026,
+  },
 ];

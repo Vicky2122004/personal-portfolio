@@ -14,13 +14,13 @@ export const Projects: React.FC = () => {
 
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === selectedProject.images.length - 1 ? 0 : prev + 1
+      prev === selectedProject.images.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? selectedProject.images.length - 1 : prev - 1
+      prev === 0 ? selectedProject.images.length - 1 : prev - 1,
     );
   };
 
@@ -304,7 +304,7 @@ export const Projects: React.FC = () => {
                               </svg>
                               <span>{feature}</span>
                             </li>
-                          )
+                          ),
                         )}
                       </ul>
                     </div>
@@ -324,7 +324,7 @@ export const Projects: React.FC = () => {
                           >
                             {tech}
                           </span>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
@@ -352,7 +352,7 @@ export const Projects: React.FC = () => {
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
-                        Live Demo
+                        Live
                       </a>
                     )}
                     {selectedProject.playStoreUrl && (
